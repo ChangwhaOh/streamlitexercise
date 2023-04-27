@@ -1,4 +1,7 @@
 import streamlit as st
+import pandas as pd
+import numpy as np
+from PIL import Image
 
 st.title('Hello World!')
 
@@ -9,9 +12,6 @@ st.text('Today is April 27th')
 st.write('I can use any python packages in this app')
 
 
-import streamlit as st
-import pandas as pd
-import numpy as np
 
 st.title('Uber pickups in NYC')
 
@@ -45,3 +45,8 @@ filtered_data = data[data[DATE_COLUMN].dt.hour == hour_to_filter]
 
 st.subheader('Map of all pickups at %s:00' % hour_to_filter)
 st.map(filtered_data)
+
+
+#image = Image.open('sunrise.jpg')
+
+st.image('https://raw.githubusercontent.com/ChangwhaOh/GEOG510/main/images/nj_omg_2.jpg', caption = 'New Jeans OMG era')
