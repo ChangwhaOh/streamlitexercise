@@ -1,52 +1,27 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
-from PIL import Image
-
-st.title('Hello World!')
-
-st.write('Changwha Oh')
-
-st.text('Today is April 27th')
-
-st.write('I can use any python packages in this app')
+import kmaps
 
 
+st.set_page_config(layout = "wide")
 
-st.title('Uber pickups in NYC')
+# Customize page title
+st.title('Introduction')
 
-DATE_COLUMN = 'date/time'
-DATA_URL = ('https://s3-us-west-2.amazonaws.com/'
-            'streamlit-demo-data/uber-raw-data-sep14.csv.gz')
+st.write('Changwha Oh, Ph.D. student at the University of Tennessee, Knoxville')
 
-@st.cache_data
-def load_data(nrows):
-    data = pd.read_csv(DATA_URL, nrows=nrows)
-    lowercase = lambda x: str(x).lower()
-    data.rename(lowercase, axis='columns', inplace=True)
-    data[DATE_COLUMN] = pd.to_datetime(data[DATE_COLUMN])
-    return data
+#st.header("Instructions")
 
-data_load_state = st.text('Loading data...')
-data = load_data(10000)
-data_load_state.text("Done! (using st.cache_data)")
+markdown = """
+1. For the [GitHub repository](https://github.com/giswqs/streamlit-multipage-template) or [use it as a template](https://github.com/giswqs/streamlit-multipage-template/generate) for your own project.
+2. Customize the sidebar by changing the sidebar text and logo in each Python files.
+3. Find your favorite emoji from https://emojipedia.org.
+4. Add a new app to the `pages/` directory with an emoji in the file name, e.g., `1_🚀_Chart.py`.
+"""
 
-if st.checkbox('Show raw data'):
-    st.subheader('Raw data')
-    st.write(data)
+st.markdown(markdown)
 
-st.subheader('Number of pickups by hour')
-hist_values = np.histogram(data[DATE_COLUMN].dt.hour, bins=24, range=(0,24))[0]
-st.bar_chart(hist_values)
+m = kmaps.Map(center = [37, 127], zoom = 7)
+m.add_base_dropdown()
+m.add_states_dropdown()
 
-# Some number in the range 0-23
-hour_to_filter = st.slider('hour', 0, 23, 17)
-filtered_data = data[data[DATE_COLUMN].dt.hour == hour_to_filter]
-
-st.subheader('Map of all pickups at %s:00' % hour_to_filter)
-st.map(filtered_data)
-
-
-#image = Image.open('sunrise.jpg')
-
-st.image('https://raw.githubusercontent.com/ChangwhaOh/GEOG510/main/images/nj_omg_2.jpg', caption = 'New Jeans OMG era')
+m.to_streamlit(height = 500)
