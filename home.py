@@ -23,5 +23,5 @@ st.markdown(markdown)
 m = kmaps.Map(center = [37, 127], zoom = 7)
 m.add_base_dropdown()
 m.add_states_dropdown()
-
-m.to_streamlit(height = 500)
+m
+#m.to_streamlit(height = 500)
