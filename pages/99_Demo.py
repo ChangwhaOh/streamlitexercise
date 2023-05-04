@@ -1,18 +1,8 @@
 import streamlit as st
 import kmaps.folmaps as kmaps
-#import leafmap.foliumap as leafmap
-#import leafmap
+import leafmap.foliumap as leafmap
 
 st.set_page_config(layout = "wide")
-
-# Customize page title
-st.title('Introduction')
-
-st.write('Changwha Oh, Ph.D. student at the University of Tennessee, Knoxville')
-
-#st.header("Instructions")
-st.sidebar.info('Contact')
-st.sidebar.markdown('[Twitter](https://twitter.com)')
 
 col1, col2 = st.columns([4, 1])
 
@@ -33,3 +23,8 @@ if url:
 
 with col1:
     m.to_streamlit()
+
+# leafmap foliumap module에서 to_streamlit 기능 가져오기
+# folmaps에 다른 기능들 (add_basemap, dropdown, ...) 추가
+# finish it by today - and submit it
+## 549도 오늘 digitizing 끝내기
